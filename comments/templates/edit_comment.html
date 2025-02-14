@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Редактирование комментария</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="text" required>{{ comment.text }}</textarea><br>
+        <button type="submit">Сохранить изменения</button>
+    </form>
+
+    <a href="{% url 'comments' %}">Назад к комментариям</a>
+</body>
+</html>

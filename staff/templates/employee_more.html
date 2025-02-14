@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{employee.name}</title>
+</head>
+{% load static %}
+<body>
+<a href="{% url 'staff' %}">Назад к сотрудникам</a>
+<div>
+  <h3>
+    {{employee.name}}
+  </h3>
+  {% if employee.photo %}
+    <img width="400" height="400" src="{% static employee.photo %}" alt="Фото сотрудника">
+  {% else %}
+    <img src="/static/default-avatar.jpg" alt="Фото отсутствует">
+  {% endif %}
+  </div>
+  <p>
+    {{employee.description}}
+  </p>
+</body>
+</html>

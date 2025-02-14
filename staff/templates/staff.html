@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+</head>
+<body>
+  <h1>
+    Сотрудники
+  </h1>
+    <ul>
+      {% for employee in staff %}
+        <li>
+          <h3><a href="{% url 'employee_more' employee.id %}">{{employee.name}}</a></h3>
+          <p>{{employee.position.name}}</p>
+        </li>
+      {% endfor %}
+    </ul>
+</body>
+</html>

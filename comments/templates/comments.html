@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отзывы</title>
+</head>
+<body>
+    <h1>Комментарии</h1>
+
+    <!-- Форма для добавления комментария -->
+    <form method="POST" action="{% url 'add_comment' %}">
+        {% csrf_token %}
+        <textarea name="text" placeholder="Введите ваш комментарий..." required></textarea><br>
+        <input type="text" name="author" placeholder="Ваше имя" required>
+        <button type="submit">Добавить комментарий</button>
+    </form>
+
+    <hr>
+
+    <!-- Список комментариев -->
+    <ul>
+        {% for comment in comments %}
+            {% if comment.is_active %}
+                <li>
+                    <strong>{{ comment.author }}</strong> ({{ comment.date|date:"d.m.Y H:i" }}):<br>
+                    {{ comment.text }}
+
+                    <!-- Кнопки редактирования и удаления -->
+                    <br>
+                    <a href="{% url 'edit_comment' comment.id %}"> Редактировать</a> |
+                    <a href="{% url 'delete_comment' comment.id %}" onclick="return confirm('Удалить комментарий?')"> Удалить</a>
+                </li>
+            {% endif %}
+        {% empty %}
+            <li>Комментариев пока нет.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
