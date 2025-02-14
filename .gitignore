@@ -5,7 +5,7 @@
 *.pyo
 *.swp
 *.swo
-
+.idea/
 
 
 
