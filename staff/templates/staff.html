@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Сотрудники</title>
-</head>
-<body>
-  <h1>
-    Сотрудники
-  </h1>
-    <ul>
+{% extends 'base.html' %}
+{%load static%}
+{% block title %}
+Сотрудники
+{% endblock %}
+{% block content %}
+  <div class="staff-container">
+    <h1 class="comments-header">Сотрудники</h1>
+    <ul class="staff-list">
       {% for employee in staff %}
-        <li>
-          <h3><a href="{% url 'employee_more' employee.id %}">{{employee.name}}</a></h3>
-          <p>{{employee.position.name}}</p>
+        <li class="staff-item">
+          <h3><a href="{% url 'employee_more' employee.id %}">{{ employee.name }}</a></h3>
+          <p>{{ employee.position.name }}</p>
         </li>
       {% endfor %}
     </ul>
-</body>
-</html>
+
+  </div>
+{% endblock %}
+

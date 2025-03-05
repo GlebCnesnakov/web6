@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{employee.name}</title>
-</head>
+{% extends 'base.html' %}
 {% load static %}
-<body>
-<a href="{% url 'staff' %}">Назад к сотрудникам</a>
-<div>
-  <h3>
-    {{employee.name}}
+{% block title %}
+  {{ employee.name }}
+{% endblock %}
+{% block content %}
+<div class="employee-container">
+  <a href="{% url 'staff' %}" class="back-link">Назад к сотрудникам</a>
+  <h3 class="employee-title">
+    {{ employee.name }}
   </h3>
   {% if employee.photo %}
-    <img width="400" height="400" src="{% static employee.photo %}" alt="Фото сотрудника">
+    <img class="employee-photo" src="{% static employee.photo %}" alt="Фото сотрудника">
   {% else %}
-    <img src="/static/default-avatar.jpg" alt="Фото отсутствует">
+    <img class="employee-photo" src="/static/default-avatar.jpg" alt="Фото отсутствует">
   {% endif %}
-  </div>
-  <p>
-    {{employee.description}}
+  <p class="employee-description">
+    {{ employee.description }}
   </p>
-</body>
-</html>
+</div>
+{% endblock %}

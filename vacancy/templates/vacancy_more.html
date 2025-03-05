@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>О вакансии</title>
-</head>
-<body>
-  <a href="{% url 'vacancy' %}">Назад к вакансиям</a>
+{% extends 'base.html' %}
+{% block title %}
+    О вакансии
+{% endblock %}
+
+{% block content %}
+<div class="vacancy-container">
+    <a href="{% url 'vacancy' %}" class="back-link">Назад к вакансиям</a>
     {% if vacancy %}
         <ul>
-                <li class="vacancy">
-                    <h2>{{ vacancy.position.name }}</h2>
-                    <p class="date">Дата публикации: {{ vacancy.date|date:"d.m.Y" }}</p>
-                    <p><strong>Зарплата:</strong> {{ vacancy.salary }} руб.</p>
-                    <p>{{ vacancy.description }}</p>
-                </li>
+            <li class="vacancy">
+                <h2>{{ vacancy.position.name }}</h2>
+                <p class="date">Дата публикации: {{ vacancy.date|date:"d.m.Y" }}</p>
+                <p><strong>Зарплата:</strong> {{ vacancy.salary }} руб.</p>
+                <p>{{ vacancy.description }}</p>
+            </li>
         </ul>
     {% else %}
         <p>На данный момент вакансий нет.</p>
     {% endif %}
-
-</body>
-</html>
+</div>
+{% endblock %}

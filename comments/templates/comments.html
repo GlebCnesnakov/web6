@@ -1,39 +1,39 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Отзывы</title>
-</head>
-<body>
-    <h1>Комментарии</h1>
+{% extends 'base.html' %}
+{% block title %}
+Отзывы
+{% endblock %}
+
+{% block content %}
+    <h1 class="comments-header">Комментарии</h1>
 
     <!-- Форма для добавления комментария -->
-    <form method="POST" action="{% url 'add_comment' %}">
+    <form method="POST" action="{% url 'add_comment' %}" class="comment-form">
         {% csrf_token %}
-        <textarea name="text" placeholder="Введите ваш комментарий..." required></textarea><br>
-        <input type="text" name="author" placeholder="Ваше имя" required>
-        <button type="submit">Добавить комментарий</button>
+        <textarea name="text" placeholder="Введите ваш комментарий..." required class="comment-textarea"></textarea><br>
+        <input type="text" name="author" placeholder="Ваше имя" required class="comment-author-input">
+        <button type="submit" class="comment-submit-button">Добавить комментарий</button>
     </form>
 
-    <hr>
+    <hr class="separator">
 
     <!-- Список комментариев -->
-    <ul>
+    <ul class="comments-list">
         {% for comment in comments %}
             {% if comment.is_active %}
-                <li>
-                    <strong>{{ comment.author }}</strong> ({{ comment.date|date:"d.m.Y H:i" }}):<br>
-                    {{ comment.text }}
+                <li class="comment-item">
+                    <strong class="comment-author">{{ comment.author }}</strong>
+                    <span class="comment-date">({{ comment.date|date:"d.m.Y H:i" }})</span>:<br>
+                    <p class="comment-text">{{ comment.text }}</p>
 
                     <!-- Кнопки редактирования и удаления -->
-                    <br>
-                    <a href="{% url 'edit_comment' comment.id %}"> Редактировать</a> |
-                    <a href="{% url 'delete_comment' comment.id %}" onclick="return confirm('Удалить комментарий?')"> Удалить</a>
+                    <div class="comment-actions">
+                        <a href="{% url 'edit_comment' comment.id %}" class="edit-comment">Редактировать</a> |
+                        <a href="{% url 'delete_comment' comment.id %}" class="delete-comment" onclick="return confirm('Удалить комментарий?')">Удалить</a>
+                    </div>
                 </li>
             {% endif %}
         {% empty %}
-            <li>Комментариев пока нет.</li>
+            <li class="no-comments">Комментариев пока нет.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Вакансии</title>
-</head>
-<body>
-    <h1>Доступные вакансии</h1>
+{% extends 'base.html' %}
+{% block title %}
+    Вакансии
+{% endblock %}
+{% block content %}
+<div class="vacancies-container">
+    <h1 class="vacancies-header">Доступные вакансии</h1>
 
     {% if vacancies %}
-        <ul>
+        <ul class="vacancies-list">
             {% for vacancy in vacancies %}
-               <li><a href="{% url 'vacancy_more' vacancy.id %}">{{ vacancy.position.name }}</a></li>
+               <li class="vacancy-item">
+                   <a href="{% url 'vacancy_more' vacancy.id %}">{{ vacancy.position.name }}</a>
+               </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>На данный момент вакансий нет.</p>
+        <p class="no-vacancies">На данный момент вакансий нет.</p>
     {% endif %}
-
-</body>
-</html>
+</div>
+{% endblock %}

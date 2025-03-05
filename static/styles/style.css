@@ -1,0 +1,339 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: #423e3e;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+main {
+    flex-grow: 1; /* Основной контент будет растягиваться, занимая доступное пространство */
+    padding: 20px;
+}
+header {
+     /* Фиксируем хэдер */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #333; /* Тёмный фон */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center; /* Выравнивание по центру */
+    gap: 20px; /* Отступы между ссылками */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header a {
+    text-decoration: none; /* Убираем подчёркивание */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+header a:hover {
+    background: #ff6600; /* Оранжевый фон при наведении */
+    color: #fff;
+}
+
+footer {
+     /* Подвал как приклеенный */
+    bottom: 0; /* Фиксация снизу */
+    left: 0; /* К началу слева */
+    right: 0; /* Без отступов справа */
+    background: #333; /* Тёмный фон */
+    color: #ccc; /* Светлый текст */
+    text-align: center;
+    margin-top: 0px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+footer a {
+    color: #ff6600; /* Оранжевый цвет ссылок */
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: white; /* Белый цвет при наведении */
+}
+
+.footer-links {
+    margin: 10px 0;
+}
+
+.footer-links a {
+    margin: 0 15px; /* Расстояние между ссылками */
+}
+
+.footer-text {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Расстояние между элементами */
+    background: #333; /* Темный фон */
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.footer-links p {
+    margin: 0;
+    color: white;
+    font-size: 16px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #ff9900;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff6600;
+}
+
+.menu {
+    list-style: none; /* Убираем маркеры */
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap; /* Чтобы элементы не слипались на маленьких экранах */
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.dish {
+    background: #f8f8f8; /* Светлый фон */
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dish:hover {
+    background: #ff6600; /* Оранжевый фон при наведении */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dish a {
+    text-decoration: none;
+    color: #333; /* Тёмный цвет текста */
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.dish:hover a {
+    color: white; /* Белый текст при наведении */
+}
+
+/* Контейнер для страницы */
+.detail_dish {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Стили для категории */
+.dish_detail_category {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6600;
+    text-align: center;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+
+}
+
+/* Стили для цены */
+.dish_detail_price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6600;
+    text-align: center;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Стили для формы добавления комментария */
+.comment-form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-textarea {
+    width: 100%;
+    height: 100px;
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.comment-author-input {
+    width: 100%;
+    height: 30px;
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.comment-submit-button {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.comment-submit-button:hover {
+    background-color: #e65c00;
+}
+
+/* Стили для разделителя */
+.separator {
+    border: 0;
+    border-top: 2px solid #eee;
+    margin: 20px 0;
+}
+
+/* Стили для списка комментариев */
+.comments-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comment-item {
+    background-color: #f1f1f1;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.comment-date {
+    font-size: 14px;
+    color: #777;
+}
+
+.comment-text {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.comment-actions {
+    margin-top: 10px;
+}
+
+.edit-comment, .delete-comment {
+    color: #ff6600;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.edit-comment:hover, .delete-comment:hover {
+    color: #e65c00;
+}
+
+.no-comments {
+    font-style: italic;
+    color: #999;
+}
+
+/* Стили для заголовка */
+.comments-header {
+    font-size: 28px;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Стили для формы редактирования */
+.edit-comment-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-comment-textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    resize: vertical;
+}
+
+.edit-comment-submit {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-comment-submit:hover {
+    background-color: #e65c00;
+}
+
+/* Стили для ссылки "Назад к комментариям" */
+.back-to-comments-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ff6600;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.back-to-comments-link:hover {
+    color: #e65c00;
+}
+
+
+

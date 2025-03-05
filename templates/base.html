@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+    <style type="text/css">
+   .staff-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Список сотрудников */
+.staff-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Элементы списка */
+.staff-item {
+    background: #f8f8f8;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Наведение на сотрудника */
+.staff-item:hover {
+    background: #ff6600;
+    color: white;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Ссылка на страницу сотрудника */
+.staff-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Наведение на ссылку */
+.staff-item:hover a {
+    color: white;
+}
+
+/* Должность */
+.staff-item p {
+    font-size: 16px;
+    color: #666;
+    margin-top: 5px;
+}
+
+
+      /* Основной контейнер */
+.employee-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #2e2b2b; /* Темный фон для контента */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center; /* Центрируем содержимое */
+}
+
+/* Кнопка "Назад" */
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background: #ff6600;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.back-link:hover {
+    background: #e65c00;
+}
+
+/* Заголовок сотрудника */
+.employee-title {
+    font-size: 28px;
+    color: #ff6600; /* Оранжевый акцент */
+    margin-bottom: 10px;
+}
+
+/* Фото сотрудника */
+.employee-photo {
+    width: 400px;
+    height: 400px;
+    object-fit: cover; /* Обрезка фото для сохранения пропорций */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Описание сотрудника */
+.employee-description {
+    font-size: 18px;
+    color: white;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+      /* Контейнер страницы */
+.vacancies-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #2e2b2b; /* Темный фон */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Заголовок */
+.vacancies-header {
+    font-size: 28px;
+    color: #ff6600; /* Оранжевый акцент */
+    margin-bottom: 20px;
+}
+
+/* Список вакансий */
+.vacancies-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Элемент списка */
+.vacancy-item {
+    background: #f8f8f8;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ссылка на вакансию */
+.vacancy-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Наведение на вакансию */
+.vacancy-item:hover {
+    background: #ff6600;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.vacancy-item:hover a {
+    color: white;
+}
+
+/* Текст "Нет вакансий" */
+.no-vacancies {
+    font-size: 18px;
+    color: white;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+
+/* Контейнер страницы */
+.vacancy-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #2e2b2b; /* Темный фон */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопка "Назад" */
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background: #ff6600;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    background: #e65c00;
+}
+
+/* Карточка вакансии */
+.vacancy {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок вакансии */
+.vacancy h2 {
+    color: #ff6600;
+    margin-bottom: 10px;
+}
+
+/* Дата публикации */
+.date {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+/* Зарплата */
+.vacancy p strong {
+    color: #333;
+    font-weight: bold;
+}
+
+  </style>
+  </head>
+  <body>
+    {% include "header.html" %}
+    <main>
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+    {% include "footer.html" %}
+  </body>
+</html>

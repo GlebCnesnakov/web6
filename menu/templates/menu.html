@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Menu</title>
-</head>
-<body>
-<a href="comments/">Комментарии</a>
-<a href="staff/">Сотрудники</a>
-<a href="vacancy/">Вакансии</a>
-    <h1>Меню</h1>
-        <ul>
+{% extends "base.html" %}
+{% load my_tags %}
+{% load static %}
+{% block title %}
+Menu
+{% endblock %}
+{% block content %}
+    <h1 class="comments-header">Меню</h1>
+        <ul class="menu">
             {% for dish in dishes %}
-                <li><a href="{% url 'dish_detail' dish.name %}">{{ dish.name }}</a></li>
+                <li class="dish">
+                    <img width="400px" height="300px" src="{% static dish.photo %}" alt="Фото блюда"><br>
+                        <a href="{% url 'dish_detail' dish.name %}">{{ dish.name|capfirst }}</a>
+                </li>
             {% endfor %}
         </ul>
-</body>
-</html>
+        {% random_dish as rd%}
+            <ul class="menu">
+                <li class="dish">
+                    Случайное блюдо<br>
+                    <img width="400px" height="300px" src="{% static rd.photo %}" alt="Фото блюда"><br>
+                    <a href="{% url 'dish_detail' rd.name %}">{{ rd.name|capfirst }}</a>
+                </li>
+            </ul>
+
+{% endblock %}

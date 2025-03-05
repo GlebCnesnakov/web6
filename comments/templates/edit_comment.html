@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-  <h1>Редактирование комментария</h1>
+{% extends 'base.html' %}
 
-    <form method="POST">
+{% block title %}
+Редактирование
+{% endblock %}
+
+{% block content %}
+    <h1 class="comments-header">Редактирование комментария</h1>
+
+    <form method="POST" class="edit-comment-form">
         {% csrf_token %}
-        <textarea name="text" required>{{ comment.text }}</textarea><br>
-        <button type="submit">Сохранить изменения</button>
+        <textarea name="text" required class="edit-comment-textarea">{{ comment.text }}</textarea><br>
+        <button type="submit" class="edit-comment-submit">Сохранить изменения</button>
     </form>
 
-    <a href="{% url 'comments' %}">Назад к комментариям</a>
-</body>
-</html>
+    <a href="{% url 'comments' %}" class="back-to-comments-link">Назад к комментариям</a>
+{% endblock %}
