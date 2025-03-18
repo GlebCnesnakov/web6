@@ -8,7 +8,8 @@ from .models import Comment
 # Create your views here.
 
 def comments(request):
-    comments = Comment.objects.filter(is_active=True).order_by("-date")
+    #comments = Comment.objects.filter(is_active=True).order_by("-date")
+    comments = Comment.published.all()
     return render(request, 'comments.html', {'comments': comments})
 
 def add_comment(request):

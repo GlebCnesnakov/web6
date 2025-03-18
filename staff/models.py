@@ -12,3 +12,4 @@ class Employee(models.Model):
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
     description = models.TextField()
     photo = models.ImageField(upload_to='staff/', blank=True, null=True)
+    slug = models.SlugField(max_length=255, db_index=True, unique=True)

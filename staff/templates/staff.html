@@ -9,7 +9,7 @@
     <ul class="staff-list">
       {% for employee in staff %}
         <li class="staff-item">
-          <h3><a href="{% url 'employee_more' employee.id %}">{{ employee.name }}</a></h3>
+          <h3><a href="{% url 'employee_more' employee.slug %}">{{ employee.name }}</a></h3>
           <p>{{ employee.position.name }}</p>
         </li>
       {% endfor %}
