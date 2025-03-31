@@ -10,7 +10,7 @@ class PublishedAndSortedModel(models.Manager):
     def __str__(self):
         return self.text
 
-# Create your models here.
+
 class Comment(models.Model):
     class Status(models.IntegerChoices):
         DRAFT = 0, 'Не опубликовано'
@@ -23,3 +23,5 @@ class Comment(models.Model):
     objects = models.Manager()
     published = PublishedAndSortedModel()
 
+    def __str__(self):
+        return self.text

@@ -5,16 +5,33 @@
 Menu
 {% endblock %}
 {% block content %}
-    <h1 class="comments-header">Меню</h1>
-        <ul class="menu">
-            {% for dish in dishes %}
-                <li class="dish">
-                    <img width="400px" height="300px" src="{% static dish.photo %}" alt="Фото блюда"><br>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="comments-header">Теги</h2>
+            <form method="get" action="">
+                {% for tag in tags %}
+                    <label class="dish_detail_category">
+                        <input type="checkbox" name="tags" value="{{ tag.name }}"
+                            {% if tag.name in selected_tags %}checked{% endif %}>
+                        {{ tag.name }}
+                    </label><br>
+                {% endfor %}
+                <button type="submit">Применить</button>
+            </form>
+        </aside>
+        
+        <main class="content">
+            <h1 class="comments-header">Меню</h1>
+            <ul class="menu">
+                {% for dish in dishes %}
+                    <li class="dish">
+                        <img width="400px" height="300px" src="{% static dish.photo %}" alt="Фото блюда"><br>
                         <a href="{% url 'dish_detail' dish.name %}">{{ dish.name|capfirst }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-        {% random_dish as rd%}
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            {% random_dish as rd %}
             <ul class="menu">
                 <li class="dish">
                     Случайное блюдо<br>
@@ -22,5 +39,6 @@ Menu
                     <a href="{% url 'dish_detail' rd.name %}">{{ rd.name|capfirst }}</a>
                 </li>
             </ul>
-
+        </main>
+    </div>
 {% endblock %}

@@ -3,9 +3,31 @@
 {% block title %}
 dish_detail
 {% endblock %}
-{%block content%}
-    <h1 class="comments-header">Блюдо: {{ dish.name|capfirst }}</h1>
-    <img src="{% static dish.photo %}" alt="Фото блюда"><br>
-    <p class="dish_detail_category">Категория: {{ dish.category.name }}</p> <br>
-    <p class="dish_detail_price">Цена: {{ dish.price }}</p>
-{%endblock%}
+{% block content %}
+    <div class="dish-container">
+        <h1 class="comments-header">Блюдо: {{ dish.name|capfirst }}</h1>
+        
+        <div class="dish-photo">
+            <img src="{% static dish.photo %}" alt="Фото блюда">
+        </div>
+        
+        <div class="dish-detail">
+            <p class="dish_detail_category"><strong>Категория:</strong> {{ dish.category.name }}</p>
+        </div>
+        
+        <div class="dish-detail">
+            <p class="dish_detail_category"><strong>Теги:</strong></p>
+            <ul class="dish-tags">
+                {% for p in dish.tags.all %}
+                    <li>{{ p.name }}</li>
+                {% empty %}
+                    <li>Нет тегов</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="dish-detail">
+            <p class="dish_detail_price"><strong>Цена:</strong> {{ dish.price }}</p>
+        </div>
+    </div>
+{% endblock %}
