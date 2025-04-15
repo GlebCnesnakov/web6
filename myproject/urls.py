@@ -20,6 +20,9 @@ from django.urls import path, include
 from django.http import HttpResponse, HttpResponseNotFound
 
 
+admin.site.site_header = "Панель администрирования"
+admin.site.index_title = "Ресторан"
+
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 

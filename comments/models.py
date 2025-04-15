@@ -16,12 +16,16 @@ class Comment(models.Model):
         DRAFT = 0, 'Не опубликовано'
         PUBLISHED = 1, 'Опубликовано'
 
-    text = models.TextField()
-    date = models.DateTimeField(default=timezone.now)
-    author = models.CharField(max_length=50)
-    is_active = models.BooleanField(default=Status.PUBLISHED, choices=Status.choices)
+    text = models.TextField(verbose_name='текст')
+    date = models.DateTimeField(default=timezone.now, verbose_name='Дата')
+    author = models.CharField(max_length=50, verbose_name='Автор')
+    is_active = models.BooleanField(default=Status.PUBLISHED, choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), verbose_name='Опубликован')
     objects = models.Manager()
     published = PublishedAndSortedModel()
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комменатрии'

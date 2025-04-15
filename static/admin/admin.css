@@ -1,0 +1,141 @@
+body, .dashboard #content {
+    background-color: #333 !important;
+    color: #fff;
+}
+
+#header {
+    background-color: #ff6600 !important;
+    border-bottom: 2px solid #ff6600;
+}
+
+#site-name a {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.button, input[type="submit"], input[type="button"], .submit-row input {
+    background-color: #ff6600 !important;
+    border-color: #ff9900 !important;
+    color: #fff !important;
+}
+
+a {
+    color: #fff;
+}
+a:hover {
+    color: #fff;
+}
+
+#user-tools {
+    background-color: #333;
+    border: none;
+}
+
+table {
+    background-color: #444;
+    color: #fff;
+}
+th {
+    background-color: #555;
+    color: #ff9900;
+}
+td {
+    border-color: #666;
+}
+
+input, select, textarea {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+}
+.errornote, .errorlist {
+    background-color: #e53935;
+    color: white;
+}
+
+.module caption {
+    background-color: #ff9900;
+    color: white;
+}
+
+a.changelink {
+    color: white;
+}
+
+a.addlink {
+    color: white;
+}
+
+#vacancy-vacancy a, #vacancy-description a {
+    color: white;
+}
+
+#comments-comment a {
+    color: white;
+}
+
+#menu-dish a, #menu-category a, #menu-tag a {
+    color: white;
+}
+
+#auth-group a, #auth-user a {
+    color: white;
+}
+
+#staff-employee a {
+    color: white;
+}
+
+.addlink a {
+    color: white;
+}
+
+#user-tools {
+    background-color: #ff6600;
+}
+
+.field-name a {
+    color: white;
+}
+
+.field-category a {
+    color: white;
+}
+
+.field-photo a {
+    color: white;
+}
+
+#changelist-filter-header {
+    background-color: #ff6600;
+}
+
+div.breadcrumbs {
+    background-color: #ff9900;
+}
+
+.field-salary a {
+    color: white;
+}
+
+.field-description a {
+    color: white;
+
+}
+
+.field-__str__ a {
+    color: white;
+}
+
+.field-text a {
+    color: white;
+}
+
+.field-date a {
+    color: white;
+}
