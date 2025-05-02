@@ -1,0 +1,2 @@
+dotnet ef migrations add CommentsToPost --startup-project .\tube\tube.csproj --project .\Data\Data.csproj
+dotnet ef database update --startup-project .\tube\tube.csproj --project .\Data\Data.csproj

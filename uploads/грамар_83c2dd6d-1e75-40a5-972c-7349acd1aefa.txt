@@ -1,0 +1,103 @@
+<pravilo> -> <predicat> :- <telo>.
+<telo> -> <cel> {, <cel>}
+<cel> -> <predicat> | <vyrazh>
+<predicat> -> <imya>'('<term>{, <term>}')'
+<term> -> <atom> | <predicat> | <spisok>
+<atom> -> <perem> | <chislo> | <stroka> | <imya>
+<spisok> -> <spisok s zag> | <prosto spisok>
+<spisok s zag> -> '[' <терм> { ',' <терм> } '|' <терм> ']'
+<posto spisok> -> '[' <терм> { ',' <терм> } ']' | '[]'
+<vyrazh> -> <term>{<oper><term>}
+<oper> -> 'is' | '=' | '==' | '\=' | '>=' | '=<' | '=\='| '=:=' | '<' | '>'
+<stroka> -> '"'любой_символ{любой_символ} | e'"'
+<perem> -> <заглавная буква>|'_'{<строчная буква>|<заглавная буква>|<цифра>|'_'}
+<imya> -> <строчная буква>{<строчная буква>}
+<строчная буква> -> 'a' | 'b' | 'c' | ... | 'z'
+<заглавная буква> -> 'A' | 'B' | 'C' | ... | 'Z'
+<цифра> -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<pravilo> -> <predicat> ':-' '('<telo>').'
+<telo> -> <cel> | <cel> ',' <telo>
+<cel> -> <predicat> | <vyrazh>
+<predicat> -> <imya>'('<term>{, <term>}')'
+<term> -> <atom> | <predicat> | <spisok>
+<atom> -> <perem> | <chislo> | <stroka> | <imya>
+<spisok> -> <spisok s zag> | <prosto spisok>
+<spisok s zag> -> '[' <терм> { ',' <терм> } '|' <терм> ']'
+<pкosto spisok> -> '[' <терм> { ',' <терм> } ']' | '[]'
+<vyrazh> -> <term> <oper> <term>
+<oper> -> 'is' | '=' | '==' | '\=' | '>=' | '=<' | '=\='| '=:=' | '<' | '>'
+<stroka> -> '"'{любой_символ / '"'}'"'
+<perem> -> <заглавная буква>|'_'{<строчная буква>|<заглавная буква>|<цифра>|'_'}
+<imya> -> <строчная буква>{<строчная буква>|<заглавная буква>|<цифра>|'_'}
+<строчная буква> -> “a” | “b” | “c” | ... | "z"
+<заглавная буква> -> "A" | "B" | "C" | ... | "Z"
+<chislo> -> ['-']<цифра>{<цифра>} ['.'<цифра>{<цифра>}]
+<цифра> -> “0” | “1” | “2” | “3” | “4” | “5” | “6” | “7” | “8” | “9”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<pravilo> -> <predicat> ':-' '('<telo>').' | <predicat> ':-' <telo>'.'
+<telo> -> <if_then_else> | <disjunction> | <sequence> | <cel>
+<if_then_else> -> <cel> '->' <telo> ';' <telo>
+<disjunction> -> <sequence> ';' <telo>
+<sequence> -> <cel> ',' <telo>
+<cel> -> <predicat> | <vyrazhenie> | <keyword>
+<keyword> -> 'true' | 'false' | 'fail' | '!'
+<predicat> -> <imya>['('<term>{, <term>}')']
+<term> -> <atom> | <predicat> | <spisok_s_zagolovkom> | <prostoi_spisok>
+<atom> -> <perem> | <chislo> | <stroka> | <imya>
+<spisok_s_zagolovkom> -> '[' <term> { ',' <term> } '|' <term> ']'
+<prostoi_spisok> -> '[' <терм> { ',' <терм> } ']' | '[]'
+<vyrazhenie> -> <term> <operator> <term>
+<operator> -> 'is' | '=' | '==' | '\=' | '>=' | '=<' | '=\='| '=:=' | '<' | '>' | '+' | '-' |
+<stroka> -> '"'{любой_символ / '"'}'"'
+<perem> -> <zaglavnaya_bukva> |'_'{<strochnaya_bukva> | <zaglavnaya_bukva>| <digit> |'_'}
+<imya> -> <strochnaya_bukva> {<strochnaya_bukva> | <zaglavnaya_bukva>|  | <digit> |'_'}
+<strochnaya_bukva> -> 'a' | 'b' | 'c' | ... | 'z'
+<zaglavnaya_bukva> -> 'A' | 'B' | 'C' | ... | 'Z'
+<chislo> -> ['-']<digit>{<digit>} ['.'<digit>{<digit>}]
+<digit> -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'

@@ -18,6 +18,23 @@ Menu
                 {% endfor %}
                 <button type="submit">Применить</button>
             </form>
+            <h2 class="comments-header">Запись</h2>
+            <form method="post" action="">
+                {% csrf_token %}
+                
+                <div class="form-error">{{ form.non_field_errors }}</div>
+            
+                {% for field in form %}
+                    <p>
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                        {{ field }}
+                    </p>
+                    <div class="form-error">{{ field.errors }}</div>
+                {% endfor %}
+            
+                <button type="submit">Записаться</button>
+            </form>
+            
         </aside>
         
         <main class="content">

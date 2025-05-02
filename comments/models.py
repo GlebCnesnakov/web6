@@ -22,6 +22,8 @@ class Comment(models.Model):
     is_active = models.BooleanField(default=Status.PUBLISHED, choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), verbose_name='Опубликован')
     objects = models.Manager()
     published = PublishedAndSortedModel()
+    image = models.ImageField(upload_to='comments/%Y/%m/%d', blank=True, null=True, verbose_name='Изображение')
+    
 
     def __str__(self):
         return self.text

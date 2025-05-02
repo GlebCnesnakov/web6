@@ -1,16 +1,25 @@
 from functools import reduce
-
 from django.utils import timezone
-
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Comment
+from .forms import CommentForm
 # Create your views here.
 
 def comments(request):
-    #comments = Comment.objects.filter(is_active=True).order_by("-date")
-    comments = Comment.published.all()
-    return render(request, 'comments.html', {'comments': comments})
+    form = CommentForm()
+    all_comments = Comment.published.all()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('comments')
+
+    return render(request, 'comments.html', {
+        'form': form,
+        'comments': all_comments,
+    })
 
 def add_comment(request):
     if request.method == "POST":

@@ -18,7 +18,8 @@ from django.conf.urls import handler404
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse, HttpResponseNotFound
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.site.site_header = "Панель администрирования"
 admin.site.index_title = "Ресторан"
@@ -36,3 +37,5 @@ urlpatterns = [
     path('staff/', include('staff.urls')),
     path('vacancy/', include('vacancy.urls'))
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

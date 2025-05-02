@@ -36,3 +36,11 @@ class Dish(models.Model):
     class Meta:
         verbose_name = "Блюдо"
         verbose_name_plural = "Блюда"
+
+
+class Reservation(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=12)
+    guests = models.IntegerField()
+    time = models.TimeField()
+    agree = models.BooleanField()
