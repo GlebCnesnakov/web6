@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="comment-container">
     <h1 class="comments-header">Комментарии</h1>
 
     <!-- Форма для добавления комментария -->
@@ -35,7 +36,7 @@
                     <p class="comment-text">{{ comment.text }}</p>
 
                     {% if comment.image %}
-                        <img src="{{ comment.image.url }}" alt="Изображение комментария" class="comment-image" width='450', height='300'>
+                        <img src="{{ comment.image.url }}" alt="Изображение комментария" class="comment-image" width='250', height='200'>
                     {% endif %}
 
                     <div class="comment-actions">
@@ -48,4 +49,5 @@
             <li class="no-comments">Комментариев пока нет.</li>
         {% endfor %}
     </ul>
+</div>
 {% endblock %}
