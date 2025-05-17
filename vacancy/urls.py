@@ -3,6 +3,6 @@ from . import views
 from django.conf import settings
 
 urlpatterns = [
-    path('', views.vacancy, name='vacancy'),
-    path('<int:vacancy_id>/more', views.vacancy_more, name='vacancy_more')
+    path('', views.VacancyListView.as_view(), name='vacancy'),
+    path('<int:vacancy_id>/more', views.VacancyDetailView.as_view(), name='vacancy_more')
 ]

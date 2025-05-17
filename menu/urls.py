@@ -7,8 +7,8 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 
 urlpatterns = [
-    path('', views.menu, name='menu'),
-    path('<dish:dish>', views.dish_detail, name='dish_detail')
+    path('', views.MenuListView.as_view(), name='menu'),
+    path('<dish:dish>', views.DishDetailView.as_view(), name='dish_detail')
 
 ]
 

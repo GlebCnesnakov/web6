@@ -6,39 +6,101 @@ from .models import Comment
 from .forms import CommentForm
 # Create your views here.
 
-def comments(request):
-    form = CommentForm()
-    all_comments = Comment.published.all()
+# def comments(request):
+#     form = CommentForm()
+#     all_comments = Comment.published.all()
 
-    if request.method == 'POST':
-        form = CommentForm(request.POST, request.FILES)
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('comments')
+
+#     return render(request, 'comments.html', {
+#         'form': form,
+#         'comments': all_comments,
+#     })
+
+# def add_comment(request):
+#     if request.method == "POST":
+#         text = request.POST["text"]
+#         author = request.POST["author"]
+#         Comment.objects.create(text=text, author=author, date=timezone.now())
+#         return redirect('../../comments/')
+#     raise Http404()
+
+# def edit_comment(request, comment_id):
+#     comment = get_object_or_404(Comment, id=comment_id)
+
+#     if request.method == "POST":
+#         comment.text = request.POST["text"]
+#         comment.save()
+#         return redirect('../../comments/')
+#     return render(request, 'edit_comment.html', {'comment':comment})
+
+# def delete_comment(request, comment_id):
+#     comment = get_object_or_404(Comment, id=comment_id)
+#     comment.delete()
+#     return redirect('../../comments/')
+
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+from django.views.generic.edit import FormMixin
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
+from django.utils import timezone
+from .models import Comment
+from .forms import CommentForm
+from utils import DataMixin
+
+
+class CommentListView(DataMixin, FormMixin, ListView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comments.html'
+    context_object_name = 'comments'
+
+    def get_queryset(self):
+        return Comment.published.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context)
+
+    def get_success_url(self):
+        return reverse_lazy('comments')
+
+    def post(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        form = self.get_form()
         if form.is_valid():
+            form.instance.date = timezone.now()  # если вручную нужно
             form.save()
-            return redirect('comments')
+            return redirect(self.get_success_url())
+        return self.render_to_response(self.get_context_data(form=form))
 
-    return render(request, 'comments.html', {
-        'form': form,
-        'comments': all_comments,
-    })
 
-def add_comment(request):
-    if request.method == "POST":
-        text = request.POST["text"]
-        author = request.POST["author"]
-        Comment.objects.create(text=text, author=author, date=timezone.now())
-        return redirect('../../comments/')
-    raise Http404()
+class CommentUpdateView(DataMixin, UpdateView):
+    model = Comment
+    fields = ['text']
+    template_name = 'edit_comment.html'
+    pk_url_kwarg = 'comment_id'
 
-def edit_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
+    def get_success_url(self):
+        return reverse_lazy('comments')
 
-    if request.method == "POST":
-        comment.text = request.POST["text"]
-        comment.save()
-        return redirect('../../comments/')
-    return render(request, 'edit_comment.html', {'comment':comment})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, title='Редактирование отзыва')
 
-def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
-    comment.delete()
-    return redirect('../../comments/')
+
+class CommentDeleteView(DataMixin, DeleteView):
+    model = Comment
+    template_name = 'confirm_delete.html'  # можно создать шаблон
+    pk_url_kwarg = 'comment_id'
+
+    def get_success_url(self):
+        return reverse_lazy('comments')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, title='Удаление отзыва')

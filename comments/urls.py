@@ -5,9 +5,9 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 
 urlpatterns = [
-    path('', views.comments, name='comments'),
-    path('add/', views.add_comment, name='add_comment'),
-    path('<int:comment_id>/edit', views.edit_comment, name='edit_comment'),
-    path('<int:comment_id>/delete', views.delete_comment, name='delete_comment'),
+    path('', views.CommentListView.as_view(), name='comments'),
+    path('add/', views.CommentListView.as_view(), name='add_comment'),
+    path('<int:comment_id>/edit', views.CommentUpdateView.as_view(), name='edit_comment'),
+    path('<int:comment_id>/delete', views.CommentDeleteView.as_view(), name='delete_comment'),
 ]
 
