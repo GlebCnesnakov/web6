@@ -2,6 +2,7 @@ from datetime import timezone
 from email.policy import default
 from django.utils import timezone
 from django.db import models
+from django.conf import settings
 
 class PublishedAndSortedModel(models.Manager):
     def get_queryset(self):
@@ -18,7 +19,8 @@ class Comment(models.Model):
 
     text = models.TextField(verbose_name='текст')
     date = models.DateTimeField(default=timezone.now, verbose_name='Дата')
-    author = models.CharField(max_length=50, verbose_name='Автор')
+    #author = models.CharField(max_length=50, verbose_name='Автор')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Автор')
     is_active = models.BooleanField(default=Status.PUBLISHED, choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), verbose_name='Опубликован')
     objects = models.Manager()
     published = PublishedAndSortedModel()
@@ -31,3 +33,6 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комменатрии'
+        permissions = [
+            ('can_edit_other_comments', 'Может редактировать чужие комментарии')
+        ]

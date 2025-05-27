@@ -294,6 +294,15 @@ comment-container {
   </head>
   <body>
     {% include "header.html" %}
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
     <main>
       <div class="containere">
         {% block content %}{% endblock %}
@@ -304,4 +313,6 @@ comment-container {
     </main>
     {% include "footer.html" %}
   </body>
+  
+
 </html>

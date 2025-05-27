@@ -10,7 +10,7 @@ menu = [
 
 class DataMixin:
     title_page = None
-    paginate_by = 1
+    paginate_by = 2
 
     def get_mixin_context(self, context, **kwargs):
         if self.title_page:

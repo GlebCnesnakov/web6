@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Employee
 from django.views.generic import ListView, DetailView
 from utils import DataMixin
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # def staff(request):
 #     staff = Employee.objects.all()
@@ -15,7 +15,7 @@ from utils import DataMixin
 #         return render(request, 'employee_more.html', {'employee': employee})
 #     return Http404
 
-class StaffListView(DataMixin, ListView):
+class StaffListView(LoginRequiredMixin, DataMixin, ListView):
     model = Employee
     template_name = 'staff.html'
     context_object_name = 'staff'
@@ -25,7 +25,7 @@ class StaffListView(DataMixin, ListView):
         return self.get_mixin_context(context, title='Сотрудники')
 
 
-class EmployeeDetailView(DataMixin, DetailView):
+class EmployeeDetailView(LoginRequiredMixin, DataMixin, DetailView):
     model = Employee
     template_name = 'employee_more.html'
     context_object_name = 'employee'

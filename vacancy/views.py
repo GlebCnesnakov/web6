@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Vacancy
 from .forms import UploadFileForm
 from utils import DataMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid
 import os
 # Create your views here.
@@ -40,12 +41,13 @@ def handle_file_request(f):
 #     vacancy = get_object_or_404(Vacancy, id=vacancy_id)
 #     return render(request, 'vacancy_more.html', {'vacancy': vacancy})
 
-class VacancyListView(DataMixin, FormMixin, ListView):
+class VacancyListView(LoginRequiredMixin, DataMixin, FormMixin, ListView):
     model = Vacancy
     template_name = 'vacancy.html'
     context_object_name = 'vacancies'
     form_class = UploadFileForm
     success_url = reverse_lazy('vacancy')  # Название маршрута в urls.py
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,7 +63,7 @@ class VacancyListView(DataMixin, FormMixin, ListView):
 
 
 
-class VacancyDetailView(DataMixin, DetailView):
+class VacancyDetailView(LoginRequiredMixin, DataMixin, DetailView):
     model = Vacancy
     template_name = 'vacancy_more.html'
     context_object_name = 'vacancy'

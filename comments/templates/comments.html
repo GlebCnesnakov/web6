@@ -29,6 +29,8 @@
     <!-- Список комментариев -->
     <ul class="comments-list">
         {% for comment in comments %}
+        
+
             {% if comment.is_active %}
                 <li class="comment-item">
                     <strong class="comment-author">{{ comment.author }}</strong>
@@ -39,12 +41,23 @@
                         <img src="{{ comment.image.url }}" alt="Изображение комментария" class="comment-image" width='250', height='200'>
                     {% endif %}
 
-                    <div class="comment-actions">
+                    {% comment %} <div class="comment-actions">
                         <a href="{% url 'edit_comment' comment.id %}" class="edit-comment">Редактировать</a> |
                         <a href="{% url 'delete_comment' comment.id %}" class="delete-comment" onclick="return confirm('Удалить комментарий?')">Удалить</a>
-                    </div>
+                    </div> {% endcomment %}
+                    {% if comment.author == user or perms.comments.change_comment %}
+          <div class="comment-actions">
+            <a href="{% url 'edit_comment' comment.id %}" class="edit-comment">Редактировать</a>
+          </div>
+          {% endif %}
+          {% if comment.author == user or perms.comments.delete_comment %}
+          <div class="comment-actions">
+            <a href="{% url 'delete_comment' comment.id %}" class="delete-comment" onclick="return confirm('Удалить комментарий?')">Удалить</a>
+          </div>
                 </li>
             {% endif %}
+            
+        {% endif %}
         {% empty %}
             <li class="no-comments">Комментариев пока нет.</li>
         {% endfor %}

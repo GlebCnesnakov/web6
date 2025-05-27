@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'menu.apps.MenuConfig',
     'comments.apps.CommentsConfig',
     'staff.apps.StaffConfig',
-    'vacancy.apps.VacancyConfig'
+    'vacancy.apps.VacancyConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,16 @@ APP_DIRS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_URL = 'users:login'
+LOGOUT_REDIRECT_URL = 'home'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'Sinipaket@yandex.ru'
+EMAIL_HOST_PASSWORD = 'zgbgmymqqcvnkgyh'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER

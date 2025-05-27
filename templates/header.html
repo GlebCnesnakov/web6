@@ -3,4 +3,14 @@
   <a href="/comments/">Комментарии</a>
   <a href="/staff/">Сотрудники</a>
   <a href="/vacancy/">Вакансии</a>
+
+  <span style="float: right;">
+    {% if user.is_authenticated %}
+      <a href="{% url 'users:profile' %}">{{ user.username }}</a> |
+      <a href="{% url 'users:logout' %}">Выйти</a>
+    {% else %}
+      <a href="{% url 'users:login' %}?next={{ request.path }}">Войти</a> |
+      <a href="{% url 'users:register' %}">Регистрация</a>
+    {% endif %}
+  </span>
 </header>

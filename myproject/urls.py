@@ -35,7 +35,8 @@ urlpatterns = [
     path('', include('menu.urls')),
     path('comments/', include('comments.urls')),
     path('staff/', include('staff.urls')),
-    path('vacancy/', include('vacancy.urls'))
+    path('vacancy/', include('vacancy.urls')),
+    path('users/', include('users.urls', namespace='users'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
