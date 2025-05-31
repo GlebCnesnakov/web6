@@ -15,7 +15,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'users/login.html'
-    extra_context = {'title': 'Авторизация'}
+    extra_context = {'title': 'Авторизация по email'}
 
     def get_success_url(self):
         return self.get_redirect_url() or reverse_lazy('menu')

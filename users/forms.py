@@ -5,8 +5,12 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    username = forms.EmailField(label='Почта', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+
+    error_messages = {
+        'invalid_login': 'Неверный пароль или почта'
+    }
 
     class Meta:
         model = User
@@ -36,7 +40,4 @@ class RegisterUserForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("Такой E-mail уже существует!")
         return email
-
-
-
 

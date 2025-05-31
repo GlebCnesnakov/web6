@@ -58,7 +58,7 @@
 
 .sidebar {
     width: 250px;  /* Фиксированная ширина сайдбара */
-    background: #333;
+    background: gray;
     padding: 15px;
     border-radius: 5px;
 }
@@ -289,6 +289,53 @@ comment-container {
     display: block;
     margin: 0 auto;
 }
+
+nav.list-pages {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+nav.list-pages ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    background-color: #1e1e1e;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+nav.list-pages li {
+    margin: 0;
+}
+
+nav.list-pages a,
+nav.list-pages .page-num {
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #2c2c2c;
+    border-right: 1px solid #444;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav.list-pages li:last-child a {
+    border-right: none;
+}
+
+nav.list-pages a:hover {
+    background-color: #444;
+    color: #e65c00;
+}
+
+nav.list-pages .page-num-selected {
+    background-color: #e65c00;
+    color: #fff;
+    font-weight: bold;
+}
+
 
   </style>
   </head>
