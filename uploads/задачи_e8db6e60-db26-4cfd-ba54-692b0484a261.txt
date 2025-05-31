@@ -1,0 +1,78 @@
+левобережка
+levoberezhka1
+CVf^WF)2dL+xQga
+
+apr
+7fyrchane-7syuzhet-vInograd2
+
+git 
+
+irm https://massgrave.dev/get | iex
+Login:
+root
+IP Address:
+46.8.230.197
+Application username:
+admin
+Application password:
+BGJh=ZSw2cCPaudXMD
+Password:
+BGJh=ZSw2cCPaudXMD
+Hostname:
+server-h4lfnH
+SSH login command:
+ssh root@46.8.230.197
+ap227@bk.ru
+12345678Ap_227
+
+2) postpred-obvivka-5brashPil
+
+---------------
+1) flm0v$yY?ASO
+--------------
+
+ggrhtjeu566
+uion4-4g
+BGJh=ZSw2cCPaudXMD
+nemets.erik@bk.ru
+
+oatdNCyOO-42
+
+git checkout <tag>/<hash> перемещение к коммиту
+
+git checkout <file> отмена непроиндексированых изменений в конкретном файле
+git reset HEAD <file> отмена индексированых изменений
+git revert HEAD для отмены коммита
+git reset --hard <tag> для удаления до коммиста с тэгом <tag>
+git tag -d <tag> удаление тэга. Это позволит внутреннему механизму Git убрать остаточные коммиты, на которые теперь не ссылаются никакие ветки или теги
+git commit -amend -m "msg" флаг -amend изменяет коммит
+
+git switch -c <name> создание ветки
+git switch <name> перемещение по веткам
+
+git show <tag>/<hash> показать изменения в коммите
+git log <file> история файла
+git mv <prev> <new> переименование
+git log --follow <file> история до git mv
+
+git log --all --graph просмотр коммитов графически
+
+git merge --abort прервать слияние
+
+git rebase --continue продолжение перебазирования после разрешения конфликта
+
+git branch посмотреть ветки
+git branch -a просмотр всех оригинальных веток
+
+git clone --bare work work.git создание чистого репо
+
+git fetch подтягивает но не сливает, в отличие от gut pull
+git branch --track <new name> <origin/name>
+
+git remote add shared ../work.git Добавить чистый репозиторий в качестве удаленного репозитория к нашему оригинальному репозиторию.
+git push <remote name> <branch name> залить в удаленку
+git fetch <remote name> подтянуть из удаленки
+
+
+
+

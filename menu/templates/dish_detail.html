@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-dish_detail
+О блюде
 {% endblock %}
 {% block content %}
     <div class="dish-container">
@@ -29,5 +29,52 @@ dish_detail
         <div class="dish-detail">
             <p class="dish_detail_price"><strong>Цена:</strong> {{ dish.price }}</p>
         </div>
+        <div class="dish-detail">
+    <p><strong>Оцените блюдо:</strong></p>
+    <p>👍 {{ likes }} | 👎 {{ dislikes }}</p>
+
+    {% if user.is_authenticated %}
+        <form method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="reaction" value="like">
+            <button type="submit" {% if user_reaction and user_reaction.type == 'like' %}disabled{% endif %}>👍 Лайк</button>
+        </form>
+
+        <form method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="reaction" value="dislike">
+            <button type="submit" {% if user_reaction and user_reaction.type == 'dislike' %}disabled{% endif %}>👎 Дизлайк</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'users:login' %}?next={{ request.path }}">Войдите</a>, чтобы оценить блюдо.</p>
+    {% endif %}
+</div>
+
+<hr>
+
+<div class="dish-detail">
+    <h2>Отзывы:</h2>
+
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="text" rows="3" placeholder="Оставьте отзыв..." required>{{ form.text.value }}</textarea>
+            <button type="submit" name="review">Отправить отзыв</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'users:login' %}?next={{ request.path }}">Войдите</a>, чтобы оставить отзыв.</p>
+    {% endif %}
+
+    <div>
+        {% for review in reviews %}
+            <p>
+                <strong>{{ review.user.username }}</strong> ({{ review.date|date:"d.m.Y H:i" }}):<br>
+                {{ review.text }}
+            </p>
+        {% empty %}
+            <p>Пока нет отзывов.</p>
+        {% endfor %}
+        </div>
+</div>
     </div>
 {% endblock %}

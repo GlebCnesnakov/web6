@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Reservation
+from .models import Reservation, DishReview
 
 def validate_name_russian(value):
     import re
@@ -53,53 +53,13 @@ class ReservationForm(forms.ModelForm):
         return guests
 
 
-
-# class ReservationForm(forms.Form):
-#     name = forms.CharField(
-#         label="Ваше имя",
-#         max_length=100,
-#         validators=[validate_name_russian],
-#         widget=forms.TextInput(attrs={'class': 'form-input'}),
-#         error_messages={
-#             'required': 'Пожалуйста, укажите ваше имя.',
-#             'max_length': 'Имя слишком длинное.',
-#         }
-#     )
-    
-#     phone = forms.CharField(
-#         label="Телефон",
-#         max_length=20,
-#         widget=forms.TextInput(attrs={'class': 'form-input'}),
-#         error_messages={
-#             'required': 'Введите номер телефона.',
-#         }
-#     )
-
-#     guests = forms.IntegerField(
-#         label="Количество гостей",
-#         min_value=1,
-#         max_value=20,
-#         widget=forms.NumberInput(attrs={'class': 'form-input'}),
-#         error_messages={
-#             'required': 'Укажите количество гостей.',
-#             'min_value': 'Минимум 1 гость.',
-#             'max_value': 'Максимум 20 гостей.',
-#         }
-#     )
-
-#     time = forms.TimeField(
-#         label="Время бронирования",
-#         widget=forms.TimeInput(attrs={'class': 'form-input', 'type': 'time'}),
-#         error_messages={
-#             'required': 'Укажите время.',
-#         }
-#     )
-
-#     agree = forms.BooleanField(
-#         label="Согласен с условиями бронирования",
-#         required=True,
-#         initial=True,
-#         error_messages={
-#             'required': 'Необходимо согласиться с условиями.'
-#         }
-#     )
+class DishReviewForm(forms.ModelForm):
+    class Meta:
+        model = DishReview           # ← ВАЖНО!
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'placeholder': 'Ваш отзыв...',
+                'rows': 3
+            })
+        }

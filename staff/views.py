@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from .models import Employee
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from utils import DataMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -15,14 +15,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 #         return render(request, 'employee_more.html', {'employee': employee})
 #     return Http404
 
-class StaffListView(LoginRequiredMixin, DataMixin, ListView):
-    model = Employee
+class StaffListView(LoginRequiredMixin, DataMixin, TemplateView):
     template_name = 'staff.html'
-    context_object_name = 'staff'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, title='Сотрудники')
+        context['staff'] = Employee.objects.all()
+        return context
 
 
 class EmployeeDetailView(LoginRequiredMixin, DataMixin, DetailView):

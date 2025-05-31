@@ -1,6 +1,5 @@
 from django.db import models
-
-
+from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=10)
@@ -36,6 +35,29 @@ class Dish(models.Model):
     class Meta:
         verbose_name = "Блюдо"
         verbose_name_plural = "Блюда"
+
+
+class DishReview(models.Model):
+    dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField(verbose_name='Отзыв')
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('dish', 'user')
+
+
+class DishReaction(models.Model):
+    class Reaction(models.TextChoices):
+        LIKE = 'like', 'Лайк'
+        DISLIKE = 'dislike', 'Дизлайк'
+
+    dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name='reactions')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    type = models.CharField(max_length=7, choices=Reaction.choices)
+
+    class Meta:
+        unique_together = ('dish', 'user')
 
 
 class Reservation(models.Model):

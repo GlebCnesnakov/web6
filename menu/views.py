@@ -1,44 +1,15 @@
 from urllib.error import HTTPError
-from .models import Dish, Tag, Reservation
+from .models import Dish, Tag, Reservation, DishReaction, DishReview
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.defaults import page_not_found
 from django.db.models import Q
-from .forms import ReservationForm
+from .forms import ReservationForm, DishReviewForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 from django.urls import reverse_lazy
 from utils import DataMixin
-# def menu(request):
-#     tags = Tag.objects.all()
-#     selected_tags = request.GET.getlist('tags')
-#     dishes = Dish.objects.all()
-#     if selected_tags:
-#         dishes = dishes.filter(tags__name__in=selected_tags)
-#     form = ReservationForm()
-#     if request.method == 'POST':
-#         form = ReservationForm(request.POST)
-#         if form.is_valid():
-#             print(form.cleaned_data)
-#             try:
-#                 #Reservation.objects.create(**form.cleaned_data)
-#                 form.save()
-#             except:
-#                 form.add_error(None, 'Ошибка добавления поста')
-#                 print(form.errors)
-#         else:
-#             print(form.errors)
-    
-#     context = {
-#         'dishes': dishes,
-#         'tags': tags,
-#         'form': form
-#     }
-#     return render(request, 'menu.html', context)
 
-# def dish_detail(request, dish):
-#     dish_obj = get_object_or_404(Dish, name=dish)
-#     return render(request, 'dish_detail.html', {'dish':dish_obj})
 
 class MenuListView(DataMixin, FormMixin, ListView):
     model = Dish
@@ -80,5 +51,44 @@ class DishDetailView(DataMixin, DetailView):
     context_object_name = 'dish'
     slug_field = 'name'
     slug_url_kwarg = 'dish'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dish = self.object
+        user = self.request.user
+
+        context['form'] = DishReviewForm()
+        context['reviews'] = dish.reviews.all().order_by('-date')
+        context['likes'] = dish.reactions.filter(type='like').count()
+        context['dislikes'] = dish.reactions.filter(type='dislike').count()
+        context['user_reaction'] = None
+
+        if user.is_authenticated:
+            context['user_reaction'] = DishReaction.objects.filter(dish=dish, user=user).first()
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        user = request.user
+
+        if not user.is_authenticated:
+            return redirect('users:login')
+
+        if 'review' in request.POST:
+            form = DishReviewForm(request.POST)
+            if form.is_valid():
+                review, created = DishReview.objects.get_or_create(user=user, dish=self.object)
+                review.text = form.cleaned_data['text']
+                review.save()
+        elif 'reaction' in request.POST:
+            reaction_type = request.POST.get('reaction')
+            if reaction_type in ['like', 'dislike']:
+                reaction, created = DishReaction.objects.get_or_create(user=user, dish=self.object)
+                reaction.type = reaction_type
+                reaction.save()
+
+        return redirect(self.request.path)
+
 
 

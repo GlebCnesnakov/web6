@@ -52,9 +52,10 @@ from .models import Comment
 from .forms import CommentForm
 from utils import DataMixin
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class CommentListView(DataMixin, FormMixin, ListView):
+class CommentListView(LoginRequiredMixin, DataMixin, FormMixin, ListView):
     model = Comment
     form_class = CommentForm
     template_name = 'comments.html'
@@ -81,7 +82,7 @@ class CommentListView(DataMixin, FormMixin, ListView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class CommentUpdateView(DataMixin, UpdateView):
+class CommentUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
     model = Comment
     fields = ['text']
     template_name = 'edit_comment.html'
@@ -101,7 +102,7 @@ class CommentUpdateView(DataMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class CommentDeleteView(DataMixin, DeleteView):
+class CommentDeleteView(LoginRequiredMixin, DataMixin, DeleteView):
     model = Comment
     template_name = 'confirm_delete.html'  # можно создать шаблон
     pk_url_kwarg = 'comment_id'
