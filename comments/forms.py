@@ -12,11 +12,6 @@ class CommentForm(forms.ModelForm):
                 'required': True,
                 'class': 'comment-textarea'
             }),
-            # 'author': forms.TextInput(attrs={
-            #     'placeholder': 'Ваше имя',
-            #     'required': True,
-            #     'class': 'comment-author-input'
-            # }),
             'image': forms.ClearableFileInput(attrs={
                 'class': 'comment-file-input'
             }),

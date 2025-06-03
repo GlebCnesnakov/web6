@@ -18,7 +18,7 @@
         <p class="no-vacancies">На данный момент вакансий нет.</p>
     {% endif %}
     <h1 class="vacancies-header">Резюме</h1>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form class="auth" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Отправить</button>

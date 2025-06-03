@@ -11,7 +11,6 @@ class StaffAdmin(admin.ModelAdmin):
     ordering = ('position',)
     search_fields = ('description',)
     list_filter = ('position',)
-    #readonly_fields = ('slug',)
     prepopulated_fields = {'slug': ('name',)}
 
     @admin.display(description='Символов в описании', ordering='position')

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Dish, Tag, Category
 
-#admin.site.register(Dish)
+
 admin.site.register(Category)
 admin.site.register(Tag)
 # Register your models here.
@@ -26,5 +26,3 @@ class DishAdmin(admin.ModelAdmin):
     search_fields = ('name__startswith',)
     list_filter = (CategoryFilter,)
     filter_horizontal = ('tags',)
-    
-

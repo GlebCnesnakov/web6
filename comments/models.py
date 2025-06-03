@@ -19,7 +19,6 @@ class Comment(models.Model):
 
     text = models.TextField(verbose_name='текст')
     date = models.DateTimeField(default=timezone.now, verbose_name='Дата')
-    #author = models.CharField(max_length=50, verbose_name='Автор')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Автор')
     is_active = models.BooleanField(default=Status.PUBLISHED, choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)), verbose_name='Опубликован')
     objects = models.Manager()

@@ -9,7 +9,6 @@ class Description(models.Model):
     def __str__(self):
         return self.text
     
-
     class Meta:
         verbose_name = "Описание"
         verbose_name_plural = "Описания"

@@ -5,15 +5,6 @@ from django.views.generic import ListView, DetailView, TemplateView
 from utils import DataMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# def staff(request):
-#     staff = Employee.objects.all()
-#     return render(request, 'staff.html', {'staff' : staff})
-
-# def employee_more(request, employee_slug):
-#     if request.method == "GET":
-#         employee = get_object_or_404(Employee, slug=employee_slug)
-#         return render(request, 'employee_more.html', {'employee': employee})
-#     return Http404
 
 class StaffListView(LoginRequiredMixin, DataMixin, TemplateView):
     template_name = 'staff.html'

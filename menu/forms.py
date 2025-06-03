@@ -52,10 +52,9 @@ class ReservationForm(forms.ModelForm):
             raise forms.ValidationError('Количество гостей должно быть от 1 до 20.')
         return guests
 
-
 class DishReviewForm(forms.ModelForm):
     class Meta:
-        model = DishReview           # ← ВАЖНО!
+        model = DishReview
         fields = ['text']
         widgets = {
             'text': forms.Textarea(attrs={

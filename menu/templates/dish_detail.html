@@ -4,13 +4,14 @@
 О блюде
 {% endblock %}
 {% block content %}
+
     <div class="dish-container">
         <h1 class="comments-header">Блюдо: {{ dish.name|capfirst }}</h1>
         
         <div class="dish-photo">
             <img src="{% static dish.photo %}" alt="Фото блюда">
         </div>
-        
+        <div class="dish-more-container">
         <div class="dish-detail">
             <p class="dish_detail_category"><strong>Категория:</strong> {{ dish.category.name }}</p>
         </div>
@@ -28,6 +29,7 @@
         
         <div class="dish-detail">
             <p class="dish_detail_price"><strong>Цена:</strong> {{ dish.price }}</p>
+        </div>
         </div>
         <div class="dish-detail">
     <p><strong>Оцените блюдо:</strong></p>
@@ -75,6 +77,7 @@
             <p>Пока нет отзывов.</p>
         {% endfor %}
         </div>
-</div>
     </div>
+    </div>
+
 {% endblock %}

@@ -75,7 +75,7 @@ class CommentListView(LoginRequiredMixin, DataMixin, FormMixin, ListView):
         self.object_list = self.get_queryset()
         form = self.get_form()
         if form.is_valid():
-            form.instance.date = timezone.now()  # если вручную нужно
+            form.instance.date = timezone.now()
             form.instance.author = request.user
             form.save()
             return redirect(self.get_success_url())
@@ -95,11 +95,6 @@ class CommentUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, title='Редактирование отзыва')
 
-    def dispatch(self, request, *args, **kwargs):
-        comment = self.get_object()
-        if comment.author != request.user or not request.user.has_perm('comments.change_comment'):
-            raise PermissionDenied("Вы не можете редактировать этот комментарий.")
-        return super().dispatch(request, *args, **kwargs)
 
 
 class CommentDeleteView(LoginRequiredMixin, DataMixin, DeleteView):
@@ -114,8 +109,3 @@ class CommentDeleteView(LoginRequiredMixin, DataMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, title='Удаление отзыва')
 
-    def dispatch(self, request, *args, **kwargs):
-        comment = self.get_object()
-        if comment.author != request.user or not request.user.has_perm('comments.delete_comment'):
-            raise PermissionDenied("Вы не можете удалить этот комментарий.")
-        return super().dispatch(request, *args, **kwargs)

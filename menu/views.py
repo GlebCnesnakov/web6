@@ -28,9 +28,6 @@ class MenuListView(DataMixin, FormMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, tags=Tag.objects.all())
-        # context['tags'] = Tag.objects.all()
-        # context['form'] = self.get_form()
-        # return context
 
     def post(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()
